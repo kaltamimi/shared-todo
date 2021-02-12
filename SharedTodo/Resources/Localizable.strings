@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  SharedTodo
+
+  Created by Kawthar Khalid al-Tamimi on 02/02/2021.
+  
+*/
+
+"createNewItem" = "Create new item";
+"addNewItem" = "Add New Todo Item";
+"addItem" = "Add Item";
