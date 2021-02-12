@@ -18,16 +18,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4SE-94-Iu9">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="144" width="414" height="718"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Yfa-tH-B6z">
+                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="zU7-gK-gEf"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="4SE-94-Iu9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="DYW-Kb-zZ6"/>
+                            <constraint firstItem="4SE-94-Iu9" firstAttribute="top" secondItem="Yfa-tH-B6z" secondAttribute="bottom" id="1tU-NH-Mfk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4SE-94-Iu9" secondAttribute="bottom" id="GLG-xM-B9p"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4SE-94-Iu9" secondAttribute="trailing" id="M0G-ib-1sl"/>
+                            <constraint firstItem="Yfa-tH-B6z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Tw6-Ik-rhE"/>
+                            <constraint firstItem="Yfa-tH-B6z" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="WkC-0o-op1"/>
+                            <constraint firstItem="Yfa-tH-B6z" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="cal-Yt-0jT"/>
                             <constraint firstItem="4SE-94-Iu9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="o62-0w-yDb"/>
                         </constraints>
                     </view>

@@ -108,4 +108,14 @@ extension TodoListViewController: UITableViewDelegate {
     
 }
 
-
+//MARK: - Search bar method
+extension TodoListViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        //fetch data from database
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+    }
+}

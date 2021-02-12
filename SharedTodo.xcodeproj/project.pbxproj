@@ -109,10 +109,10 @@
 		F1B131AF25AF7B7400F1446A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F1F5F1E225AE3667007B6CD9 /* Assets.xcassets */,
 				F1F5F1E725AE3667007B6CD9 /* Info.plist */,
-				F1BA92E525C08C8D00AD8AB1 /* ColorPalette.swift */,
+				F1F5F1E225AE3667007B6CD9 /* Assets.xcassets */,
 				F1BA92E825C08CEE00AD8AB1 /* Colors.xcassets */,
+				F1BA92E525C08C8D00AD8AB1 /* ColorPalette.swift */,
 				F188D6AB25C9E9F200844CF0 /* Localizable.strings */,
 			);
 			path = Resources;
