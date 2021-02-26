@@ -14,6 +14,12 @@ class TodoListViewController: UIViewController {
     let userDefualt = UserDefaults.standard
     
     var itemArray = [Item]()
+    var selectedCategory: Category? {
+        didSet {
+            //Load data
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
