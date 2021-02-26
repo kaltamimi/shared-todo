@@ -47,9 +47,15 @@ extension UILabel{
 
 enum LocalizedKey: String {
     
+    //Item
     case createNewItem
     case addNewItem
     case addItem
+    
+    //Category
+    case createNewCategory
+    case addNewCategory
+    case add
 }
   
 

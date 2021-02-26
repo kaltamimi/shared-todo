@@ -6,6 +6,12 @@
   
 */
 
+//Item
 "createNewItem" = "Create new item";
 "addNewItem" = "Add New Todo Item";
 "addItem" = "Add Item";
+
+//Category
+"createNewCategory" = "Create new category";
+"addNewCategory" = "Add a new category";
+"add" = "Add";

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dpa-JJ-3yl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--TodoItem-->
+        <!--Items-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="TodoListViewController" id="BYZ-38-t0r" customClass="TodoListViewController" customModule="SharedTodo" customModuleProvider="target" sceneMemberID="viewController">
@@ -41,7 +42,7 @@
                             <constraint firstItem="4SE-94-Iu9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="o62-0w-yDb"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="TodoItem" id="KSa-yc-iQv">
+                    <navigationItem key="navigationItem" title="Items" id="KSa-yc-iQv">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ciA-6N-cXO">
                             <connections>
                                 <action selector="addButtonPressed:" destination="BYZ-38-t0r" id="UWN-JJ-m1h"/>
@@ -65,6 +66,7 @@
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.3004653123416029" green="0.76164216090744918" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" name="trichromacy"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" systemColor="labelColor"/>
                         </textAttributes>
@@ -83,6 +85,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="trichromacy">
+            <color red="0.63529411764705879" green="0.90196078431372551" blue="0.396078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
