@@ -56,6 +56,8 @@ enum LocalizedKey: String {
     case createNewCategory
     case addNewCategory
     case add
+    
+    case getFromRealmErrorMsg
 }
   
 

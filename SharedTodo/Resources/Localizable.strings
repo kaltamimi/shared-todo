@@ -15,3 +15,7 @@
 "createNewCategory" = "Create new category";
 "addNewCategory" = "Add a new category";
 "add" = "Add";
+
+
+//Error Messages
+"getFromRealmErrorMsg" = "Error to load categories from realm";

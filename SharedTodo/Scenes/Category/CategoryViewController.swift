@@ -10,14 +10,14 @@ import UIKit
 class CategoryViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
-    var categoryArray = [Category]()
+
+    let viewModel: CategoryViewModelProtocol = CategoryViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureTableView()
-        setupData()
+        loadCategories()
 
     }
     
@@ -27,16 +27,14 @@ class CategoryViewController: UIViewController {
         tableView.delegate = self
     }
     
+    func loadCategories() {
     
-    func setupData(){
-        
-        let newItem = Category(name: "Work")
-        let newItem2 = Category(name: "Home")
-        let newItem3 = Category(name: "Kitchen")
-    
-        categoryArray.append(newItem)
-        categoryArray.append(newItem2)
-        categoryArray.append(newItem3)
+        viewModel.getCategoriesFromRealm {
+            
+        } failed: { (error) in
+            print(error ?? getLocalizedString(localizedKey: .getFromRealmErrorMsg))
+        }
+
     }
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -46,9 +44,12 @@ class CategoryViewController: UIViewController {
         let alert = UIAlertController(title: getLocalizedString(localizedKey: .createNewCategory) , message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: getLocalizedString(localizedKey: .add), style: .default) { (action) in
             //what will happen once usser clicks the Add Item button on our UIAlert
-            if let name = textField.text {
-                self.categoryArray.append(Category(name: name))
-               // self.userDefualt.setValue(item, forKey: Constant.todoArrayKey)
+            if let catrgoryName = textField.text {
+
+                let newCategory = Category()
+                newCategory.name = catrgoryName
+                
+                self.viewModel.saveCategory(category: newCategory)
                 self.tableView.reloadData()
             }
         }
@@ -68,15 +69,14 @@ class CategoryViewController: UIViewController {
 extension CategoryViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryArray.count
+        return viewModel.categoriesCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         
-        cell.textLabel?.text = categoryArray[indexPath.row].name
-        
+        cell.textLabel?.text = viewModel.getCategoryAt(at: indexPath.row)?.name
         
         return cell
     }
@@ -88,11 +88,15 @@ extension CategoryViewController: UITableViewDataSource {
 extension CategoryViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        let todoController = TodoListViewController.instantiate(fromAppStoryboard: .todoList, storyboardID: .todoListViewController)
-        //        let navigation = UINavigationController(rootViewController: todoController)
-        //        navigation.modalPresentationStyle = .fullScreen
-        //        present(navigation, animated: true, completion: nil)
+        
+        let todoController = TodoListViewController.instantiate(fromAppStoryboard: .todoList, storyboardID: .todoListViewController)
+        todoController.selectedCategory = viewModel.getCategoryAt(at: indexPath.row)
+        let navigation = UINavigationController(rootViewController: todoController)
+        navigation.modalPresentationStyle = .fullScreen
+        present(navigation, animated: true, completion: nil)
+        
     }
+    
 }
 
 //MARK: - Data Mainpulation Methods
