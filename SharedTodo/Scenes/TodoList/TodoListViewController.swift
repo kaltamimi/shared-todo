@@ -6,18 +6,20 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TodoListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let userDefualt = UserDefaults.standard
+    let viewModel : TodoListProtocol = TodoListViewModel()
     
-    var itemArray = [Item]()
+    var itemArray: Results<Item>?
+    
     var selectedCategory: Category? {
         didSet {
             //Load data
-            
+            loadItem()
         }
     }
     
@@ -26,7 +28,7 @@ class TodoListViewController: UIViewController {
         
         configureTableView()
         setNavigationBar()
-        setupData()
+        
     }
     
     func setNavigationBar(){
@@ -41,18 +43,17 @@ class TodoListViewController: UIViewController {
         tableView.delegate = self
     }
     
-    func setupData(){
+    func loadItem(){
         
-        let newItem = Item(title: "Milk", done: true)
-        let newItem2 = Item(title: "Honey", done: false)
-        let newItem3 = Item(title: "egg", done: true)
-    
-        itemArray.append(newItem)
-        itemArray.append(newItem2)
-        itemArray.append(newItem3)
+        itemArray = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
+//        viewModel.getItemsFromRealm {
+//
+//        } failed: { (error) in
+//            print(error ?? getLocalizedString(localizedKey: .getFromRealmErrorMsg))
+//        }
+
     }
     
-
 
     //MARK: - Add New Item
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -63,8 +64,16 @@ class TodoListViewController: UIViewController {
         let action = UIAlertAction(title: getLocalizedString(localizedKey: .addItem), style: .default) { (action) in
             //what will happen once usser clicks the Add Item button on our UIAlert
             if let item = textField.text {
-                self.itemArray.append(Item(title: item, done: false))
-                self.userDefualt.setValue(item, forKey: Constant.todoArrayKey)
+
+                let newItem = Item()
+                newItem.title = item
+                newItem.done = false
+                
+                if let category = self.selectedCategory {
+                    self.viewModel.saveItem(category: category ,item: newItem)
+                }
+                
+                
                 self.tableView.reloadData()
             }
         }
@@ -84,16 +93,16 @@ class TodoListViewController: UIViewController {
 extension TodoListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemArray.count
+        return itemArray?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: ToDoItemCell = tableView.dequeueReusableCell(at: indexPath)
         
-        let item =  itemArray[indexPath.row]
-        cell.textLabel?.text = item.title
-        cell.accessoryType = item.done ? .checkmark : .none
+        let item =  itemArray?[indexPath.row]
+        cell.textLabel?.text = item?.title ?? "no item"
+        cell.accessoryType = item?.done ?? false ? .checkmark : .none
         
         return cell
     }
@@ -106,7 +115,7 @@ extension TodoListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        itemArray?[indexPath.row].done = !(itemArray?[indexPath.row].done ?? false)
 
         tableView.reloadData()
         tableView.deselectRow(at: indexPath, animated: true)
